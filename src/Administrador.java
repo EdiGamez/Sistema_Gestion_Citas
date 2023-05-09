@@ -1,28 +1,18 @@
 public class Administrador extends Persona {
-    private String contraseña;
+    private String usuario;
+    private String contrasena;
 
-    public Administrador(String identificador, String nombreCompleto, String contraseña) {
-        super(identificador, nombreCompleto);
-        this.contraseña = contraseña;
+    public Administrador(String nombre, String apellido, String usuario, String contrasena) {
+        super(nombre, apellido);
+        this.usuario = usuario;
+        this.contrasena = contrasena;
     }
 
-    public String getContraseña() {
-        return contraseña;
+    public String getUsuario() {
+        return this.usuario;
     }
 
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
-    }
-
-    public boolean validarAcceso(String contraseña) {
-        return this.contraseña.equals(contraseña);
-    }
-    @Override
-    public String toString() {
-        return "Administrador{" +
-                "contraseña='" + contraseña + '\'' +
-                ", identificador='" + getIdentificador() + '\'' +
-                ", nombreCompleto='" + getNombreCompleto() + '\'' +
-                '}';
+    public String getContrasena() {
+        return this.contrasena;
     }
 }

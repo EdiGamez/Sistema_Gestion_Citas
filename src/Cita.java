@@ -1,67 +1,55 @@
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.UUID;
 
-public class Cita {
-    private String identificador;
-    private LocalDateTime fechaHora;
-    private String motivo;
-    private Doctor doctor;
+class Cita {
+    private UUID id;
     private Paciente paciente;
+    private Medico medico;
+    private LocalDateTime fechaHora;
+    DateTimeFormatter formatter;
+    private EstatusCita estatus;
 
-    public Cita(String identificador, LocalDateTime fechaHora, String motivo, Doctor doctor, Paciente paciente) {
-        this.identificador = identificador;
-        this.fechaHora = fechaHora;
-        this.motivo = motivo;
-        this.doctor = doctor;
+    public Cita(UUID id, Paciente paciente, Medico medico, LocalDateTime fechaHora, EstatusCita estatus) {
+        this.formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        this.id = id;
         this.paciente = paciente;
+        this.medico = medico;
+        this.fechaHora = fechaHora;
+        this.estatus = estatus;
     }
 
-    public String getIdentificador() {
-        return identificador;
+    public Cita(Paciente paciente, Medico medico, LocalDateTime fechaHora) {
+        this(UUID.randomUUID(), paciente, medico, fechaHora, Cita.EstatusCita.PENDIENTE);
     }
 
-    public void setIdentificador(String identificador) {
-        this.identificador = identificador;
+    public UUID getId() {
+        return this.id;
     }
 
     public Paciente getPaciente() {
-        return paciente;
+        return this.paciente;
     }
 
-    public void setPaciente(Paciente paciente) {
-        this.paciente = paciente;
+    public Medico getMedico() {
+        return this.medico;
     }
 
-    public Doctor getDoctor() {
-        return doctor;
+    public String toCSV() {
+        String var10000 = String.valueOf(this.id);
+        return var10000 + "," + String.valueOf(this.paciente.getId()) + "," + String.valueOf(this.medico.getId()) + "," + this.fechaHora.format(this.formatter) + "," + String.valueOf(this.estatus);
     }
 
-    public void setDoctor(Doctor doctor) {
-        this.doctor = doctor;
-    }
-
-    public String getMotivo() {
-        return motivo;
-    }
-
-    public void setMotivo(String motivo) {
-        this.motivo = motivo;
-    }
-
-    public LocalDateTime getFechaHora() {
-        return fechaHora;
-    }
-
-    public void setFechaHora(LocalDateTime fechaHora) {
-        this.fechaHora = fechaHora;
-    }
-    @Override
     public String toString() {
-        return "Cita{" +
-                "identificador='" + identificador + '\'' +
-                ", fechaHora=" + fechaHora +
-                ", motivo='" + motivo + '\'' +
-                ", doctor=" + doctor +
-                ", paciente=" + paciente +
-                '}';
+        String var10000 = this.paciente.getNombre();
+        return "Paciente: " + var10000 + " " + this.paciente.getApellido() + "\nMedico: " + this.medico.getNombre() + " " + this.medico.getApellido() + ",\nFecha y Hora: " + this.fechaHora.format(this.formatter) + ",\nEstatus: " + String.valueOf(this.estatus) + "\nID: " + String.valueOf(this.getId());
+    }
+
+    public static enum EstatusCita {
+        PENDIENTE,
+        REALIZADA;
+
+        private EstatusCita() {
+        }
     }
 }

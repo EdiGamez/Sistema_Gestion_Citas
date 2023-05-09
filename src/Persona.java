@@ -1,34 +1,32 @@
-public abstract class Persona {
-    private String identificador;
-    private String nombreCompleto;
+import java.util.UUID;
 
-    public Persona(String identificador, String nombreCompleto) {
-        this.identificador = identificador;
-        this.nombreCompleto = nombreCompleto;
+abstract class Persona {
+    private UUID id;
+    private String nombre;
+    private String apellido;
+
+    public Persona(UUID id, String nombre, String apellido) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido = apellido;
     }
 
-    public String getIdentificador() {
-        return identificador;
+    public Persona(String nombre, String apellido) {
+        this.id = UUID.randomUUID();
+        this.nombre = nombre;
+        this.apellido = apellido;
     }
 
-    public void setIdentificador(String identificador) {
-        this.identificador = identificador;
+    public UUID getId() {
+        return this.id;
     }
 
-    public String getNombreCompleto() {
-        return nombreCompleto;
+    public String getNombre() {
+        return this.nombre;
     }
 
-    public void setNombreCompleto(String nombreCompleto) {
-        this.nombreCompleto = nombreCompleto;
-    }
-
-    @Override
-    public String toString() {
-        return "Persona{" +
-                "identificador='" + identificador + '\'' +
-                ", nombreCompleto='" + nombreCompleto + '\'' +
-                '}';
+    public String getApellido() {
+        return this.apellido;
     }
 }
 
