@@ -1,0 +1,13 @@
+## Uso del programa
+
+1. Ejecuta el archivo JAR generado java -jar sistema-gestion-citas.jar
+2. Ingresa con las credenciales de administrador proporcionadas.
+3. Navega por las diferentes opciones del menú para gestionar citas, pacientes y médicos.
+
+## Créditos
+
+Este proyecto fue desarrollado por Eduardo Flores Gámez como parte de la evidencia final del curso de Programación en Java.
+
+## Licencia
+
+Este proyecto está licenciado bajo la Licencia MIT.
