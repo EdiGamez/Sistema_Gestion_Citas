@@ -1,12 +1,11 @@
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -19,9 +18,6 @@ public class SistemaCitas implements AlmacenamientoDatos {
     private List<Medico> medicos = new ArrayList();
     private List<Cita> citas = new ArrayList();
     private List<Administrador> administradores = new ArrayList();
-    private static final String PACIENTES_CSV = "db/pacientes.csv";
-    private static final String MEDICOS_CSV = "db/medicos.csv";
-    private static final String CITAS_CSV = "db/citas.csv";
 
     public SistemaCitas() {
         try {
@@ -154,17 +150,12 @@ public class SistemaCitas implements AlmacenamientoDatos {
     }
 
     public Paciente buscarPacientesPorNombre(String nombre, String apellido) {
-        List<Paciente> pacientesEncontrados = new ArrayList();
-        Iterator var4 = this.pacientes.iterator();
-
-        while(var4.hasNext()) {
-            Paciente paciente = (Paciente)var4.next();
+        for (Paciente paciente : pacientes) {
             if (paciente.getNombre().equalsIgnoreCase(nombre) && paciente.getApellido().equalsIgnoreCase(apellido)) {
-                pacientesEncontrados.add(paciente);
+                return paciente;
             }
         }
-
-        return (Paciente)pacientesEncontrados.get(0);
+        return null; // Devuelve null si no se encuentra ningún paciente con ese nombre y apellido
     }
 
     public Medico buscarMedicosPorNombre(String nombre, String apellido) {
@@ -237,10 +228,21 @@ public class SistemaCitas implements AlmacenamientoDatos {
 
     }
 
-    private void cargarPacientes() throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader("db/pacientes.csv"));
 
-        String line;
+    private void cargarPacientes() throws IOException {
+        File dbDirectory = new File("db");
+        if (!dbDirectory.exists()) {
+            dbDirectory.mkdir();
+        }
+
+        File file = new File("db/pacientes.csv");
+
+        if (!file.exists()) {
+            // Copia el archivo pacientes.csv del .jar al archivo externo
+            copyFileFromJar("db/pacientes.csv", file);
+        }
+
+        BufferedReader reader = new BufferedReader(new FileReader(file, StandardCharsets.UTF_8));String line;
         try {
             while((line = reader.readLine()) != null) {
                 String[] data = line.split(",");
@@ -266,13 +268,16 @@ public class SistemaCitas implements AlmacenamientoDatos {
     }
 
     private void cargarMedicos() throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader("db/medicos.csv"));
+        File medicosFile = new File("db/medicos.csv");
+        if (!medicosFile.exists()) {
+            medicosFile.getParentFile().mkdirs();
+            Files.copy(SistemaCitas.class.getResourceAsStream("/db/medicos.csv"), medicosFile.toPath());
+        }
 
-        String line;
-        try {
+        try (BufferedReader reader = new BufferedReader(new FileReader(medicosFile, StandardCharsets.UTF_8))) {
+            String line;
             while((line = reader.readLine()) != null) {
                 String[] data = line.split(",");
-
                 try {
                     UUID medicoId = UUID.fromString(data[0]);
                     this.medicos.add(new Medico(medicoId, data[1], data[2], data[3]));
@@ -280,52 +285,33 @@ public class SistemaCitas implements AlmacenamientoDatos {
                     System.err.println("UUID no válido en el archivo medicos.csv: " + data[0]);
                 }
             }
-        } catch (Throwable var7) {
-            try {
-                reader.close();
-            } catch (Throwable var5) {
-                var7.addSuppressed(var5);
-            }
-
-            throw var7;
         }
-
-        reader.close();
     }
 
     private void cargarCitas() throws IOException {
-        if (Files.exists(Paths.get("db/citas.csv"), new LinkOption[0])) {
-            BufferedReader reader = new BufferedReader(new FileReader("db/citas.csv"));
-
-            String line;
-            try {
-                while((line = reader.readLine()) != null) {
-                    String[] data = line.split(",");
-                    UUID citaID = UUID.fromString(data[0]);
-                    UUID pacienteID = UUID.fromString(data[1]);
-                    UUID medicoID = UUID.fromString(data[2]);
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-                    LocalDateTime fechaHora = LocalDateTime.parse(data[3], formatter);
-                    Cita.EstatusCita estatus = Cita.EstatusCita.valueOf(data[4]);
-                    Paciente paciente = this.buscarPacientePorId(pacienteID);
-                    Medico medico = this.buscarMedicoPorId(medicoID);
-                    if (paciente != null && medico != null) {
-                        this.citas.add(new Cita(citaID, paciente, medico, fechaHora, estatus));
-                    }
-                }
-            } catch (Throwable var13) {
-                try {
-                    reader.close();
-                } catch (Throwable var12) {
-                    var13.addSuppressed(var12);
-                }
-
-                throw var13;
-            }
-
-            reader.close();
+        File citasFile = new File("db/citas.csv");
+        if (!citasFile.exists()) {
+            citasFile.getParentFile().mkdirs();
+            Files.copy(SistemaCitas.class.getResourceAsStream("/db/citas.csv"), citasFile.toPath());
         }
 
+        try (BufferedReader reader = new BufferedReader(new FileReader(citasFile, StandardCharsets.UTF_8))) {
+            String line;
+            while((line = reader.readLine()) != null) {
+                String[] data = line.split(",");
+                UUID citaID = UUID.fromString(data[0]);
+                UUID pacienteID = UUID.fromString(data[1]);
+                UUID medicoID = UUID.fromString(data[2]);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+                LocalDateTime fechaHora = LocalDateTime.parse(data[3], formatter);
+                Cita.EstatusCita estatus = Cita.EstatusCita.valueOf(data[4]);
+                Paciente paciente = this.buscarPacientePorId(pacienteID);
+                Medico medico = this.buscarMedicoPorId(medicoID);
+                if (paciente != null && medico != null) {
+                    this.citas.add(new Cita(citaID, paciente, medico, fechaHora, estatus));
+                }
+            }
+        }
     }
 
     public void guardarPacientesEnCSV(Paciente paciente) throws IOException {
@@ -355,8 +341,11 @@ public class SistemaCitas implements AlmacenamientoDatos {
         pw.close();
     }
 
+
     public void cargarAdministradores() throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader("db/administradores.csv"));
+        ClassLoader classLoader = SistemaCitas.class.getClassLoader();
+        InputStream inputStream = classLoader.getResourceAsStream("db/administradores.csv");
+        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
         try {
             reader.readLine();
             String line;
@@ -381,4 +370,11 @@ public class SistemaCitas implements AlmacenamientoDatos {
 
         reader.close();
     }
+
+    private void copyFileFromJar(String sourcePath, File destination) throws IOException {
+        InputStream inputStream = getClass().getClassLoader().getResourceAsStream(sourcePath);
+        Files.copy(inputStream, destination.toPath(), StandardCopyOption.REPLACE_EXISTING);
+    }
+
 }
+

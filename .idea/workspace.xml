@@ -1,21 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="Sistema_Gestion_Citas:jar7" />
+    </artifacts-to-build>
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aba55ad0-109e-4c13-8021-c40b323e98cd" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/Sistema_Gestion_Citas_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/Sistema_Gestion_Citas_jar2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/Sistema_Gestion_Citas_jar3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/Sistema_Gestion_Citas_jar4.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/Sistema_Gestion_Citas_jar5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/medicos.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/resources.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_09_05_2023_04_55_p__m___Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_09_05_2023_04_55_p__m___Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Administrador.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Cita.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Doctor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/IAlmacenable.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/InterfazUsuario.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Login.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Paciente.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Persona.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SistemaCitas.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AlmacenamientoDatos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AlmacenamientoDatos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SistemaCitas.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SistemaCitas.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,6 +39,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/SistemaCitas.java" root0="SKIP_INSPECTION" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -45,9 +55,22 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Cosas/Escuela/5to Semestre/Computación en Java/Sistema_Gestion_Citas&quot;
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;19&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Cosas/Escuela/5to Semestre/Computación en Java/Sistema_Gestion_Citas/resources&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Cosas\Escuela\5to Semestre\Computación en Java\Sistema_Gestion_Citas\resources" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Cosas\Escuela\5to Semestre\Computación en Java\Sistema_Gestion_Citas\resources" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
