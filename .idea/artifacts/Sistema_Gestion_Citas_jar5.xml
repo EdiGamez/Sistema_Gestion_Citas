@@ -1,0 +1,12 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Sistema_Gestion_Citas:jar5">
+    <output-path>$PROJECT_DIR$/out/artifacts/Sistema_Gestion_Citas_jar5</output-path>
+    <root id="archive" name="Sistema_Gestion_Citas.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/resources/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="module-output" name="Sistema_Gestion_Citas" />
+      <element id="module-output" name="resources" />
+    </root>
+  </artifact>
+</component>
