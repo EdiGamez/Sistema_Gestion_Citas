@@ -7,20 +7,20 @@ class Cita {
     private Paciente paciente;
     private Medico medico;
     private LocalDateTime fechaHora;
-    DateTimeFormatter formatter;
-    private EstatusCita estatus;
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    private String asunto;
 
-    public Cita(UUID id, Paciente paciente, Medico medico, LocalDateTime fechaHora, EstatusCita estatus) {
-        this.formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    public Cita(UUID id, Paciente paciente, Medico medico, LocalDateTime fechaHora, String asunto) {
         this.id = id;
         this.paciente = paciente;
         this.medico = medico;
         this.fechaHora = fechaHora;
-        this.estatus = estatus;
+        this.asunto = asunto;
     }
 
-    public Cita(Paciente paciente, Medico medico, LocalDateTime fechaHora) {
-        this(UUID.randomUUID(), paciente, medico, fechaHora, Cita.EstatusCita.PENDIENTE);
+    // Constructor sin UUID
+    public Cita(Paciente paciente, Medico medico, LocalDateTime fechaHora, String asunto) {
+        this(UUID.randomUUID(), paciente, medico, fechaHora, asunto);
     }
 
     public UUID getId() {
@@ -37,19 +37,15 @@ class Cita {
 
     public String toCSV() {
         String var10000 = String.valueOf(this.id);
-        return var10000 + "," + String.valueOf(this.paciente.getId()) + "," + String.valueOf(this.medico.getId()) + "," + this.fechaHora.format(this.formatter) + "," + String.valueOf(this.estatus);
+        return var10000 + "," + String.valueOf(this.paciente.getId()) + "," + String.valueOf(this.medico.getId()) + "," + this.fechaHora.format(this.formatter) + "," +asunto;
     }
 
     public String toString() {
         String var10000 = this.paciente.getNombre();
-        return "Paciente: " + var10000 + " " + this.paciente.getApellido() + "\nMedico: " + this.medico.getNombre() + " " + this.medico.getApellido() + ",\nFecha y Hora: " + this.fechaHora.format(this.formatter) + ",\nEstatus: " + String.valueOf(this.estatus) + "\nID: " + String.valueOf(this.getId());
+        return " Paciente: " + var10000 + " " + this.paciente.getApellido() + "\n Medico: " + this.medico.getNombre() + " " + this.medico.getApellido() + ",\n Fecha y Hora: " + this.fechaHora.format(this.formatter) + ",\n Motivo: " +asunto + "\n ID: " + String.valueOf(this.getId());
+    }
+    public LocalDateTime getFechaHora() {
+        return fechaHora;
     }
 
-    public static enum EstatusCita {
-        PENDIENTE,
-        REALIZADA;
-
-        private EstatusCita() {
-        }
-    }
 }

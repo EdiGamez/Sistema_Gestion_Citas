@@ -14,7 +14,6 @@ public class Main {
                 } catch (Exception var2) {
                     var2.printStackTrace();
                 }
-
             }
         });
     }

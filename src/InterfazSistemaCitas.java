@@ -1,5 +1,6 @@
 
 import java.awt.Component;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Iterator;
@@ -103,6 +104,7 @@ public class InterfazSistemaCitas extends JFrame {
             String apellidoPaciente = JOptionPane.showInputDialog("Ingrese el apellido del paciente:");
             String nombreMedico = JOptionPane.showInputDialog("Ingrese el nombre del médico:");
             String apellidoMedico = JOptionPane.showInputDialog("Ingrese el apellido del médico:");
+            String asuntoCita = JOptionPane.showInputDialog("Ingrese el asunto de la cita:");
             JComboBox<Integer> comboDia = new JComboBox();
 
             for(int i = 1; i <= 30; ++i) {
@@ -139,18 +141,22 @@ public class InterfazSistemaCitas extends JFrame {
                     Paciente paciente = sistemaCitas.buscarPacientePorNombre(nombrePaciente.trim(), apellidoPaciente.trim());
                     Medico medico = sistemaCitas.buscarMedicoPorNombre(nombreMedico.trim(), apellidoMedico.trim());
                     if (paciente != null && medico != null) {
-                        sistemaCitas.agregarCita(paciente, medico, fechaHora);
-                        JOptionPane.showMessageDialog((Component)null, "Cita creada exitosamente.");
+                        if (!sistemaCitas.citaExistente(medico, fechaHora)) {
+                            Cita cita = new Cita(paciente, medico, fechaHora,asuntoCita);
+                            sistemaCitas.agregarCita(paciente, medico, fechaHora,asuntoCita);
+
+                            JOptionPane.showMessageDialog((Component) null, "Cita creada exitosamente.");
+                        } else {
+                            JOptionPane.showMessageDialog((Component) null, "El médico ya tiene una cita programada en esa fecha y hora.");
+                        }
                     } else {
-                        JOptionPane.showMessageDialog((Component)null, "No se pudo crear la cita. Por favor, verifique los datos del paciente y médico.");
+                        JOptionPane.showMessageDialog((Component) null, "No se pudo crear la cita. Por favor, verifique los datos del paciente y médico.");
                     }
                 } else {
-                    JOptionPane.showMessageDialog((Component)null, "No se pudo crear la cita. Por favor, complete todos los campos.");
-                }
-            } else if (opcion == 2) {
-                JOptionPane.showMessageDialog((Component)null, "Creación de cita cancelada.");
+                    JOptionPane.showMessageDialog((Component) null, "No se pudo crear la cita. Por favor, complete todos los campos.");
+                }} else if (opcion == 2) {
+                JOptionPane.showMessageDialog((Component) null, "Creación de cita cancelada.");
             }
-
         });
         buscarCita.addActionListener((e) -> {
             String nombrePaciente = JOptionPane.showInputDialog("Ingrese el nombre del paciente:");
@@ -165,7 +171,7 @@ public class InterfazSistemaCitas extends JFrame {
                 while(var8.hasNext()) {
                     Cita c = (Cita)var8.next();
                     resultado.append(c.toString());
-                    resultado.append("\n--------------------------------");
+                    resultado.append("\n--------------------------------\n");
                 }
 
                 JOptionPane.showMessageDialog((Component)null, resultado.toString());

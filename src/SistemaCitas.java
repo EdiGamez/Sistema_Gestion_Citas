@@ -52,17 +52,22 @@ public class SistemaCitas implements AlmacenamientoDatos {
 
     }
 
-    public void agregarCita(Paciente paciente, Medico medico, LocalDateTime fechaHora) {
-        Cita cita = new Cita(paciente, medico, fechaHora);
-        this.citas.add(cita);
-
+    public void agregarCita(Paciente paciente, Medico medico, LocalDateTime fechaHora,String asunto) {
+        // Verificar si ya existe una cita con el mismo médico en la misma fecha y hora
+        if (citaExistente(medico, fechaHora)) {
+            System.out.println("El médico ya tiene una cita programada en la misma fecha y hora.");
+            return;
+        }
         try {
-            this.guardarCitasEnCSV(cita);
+            this.guardarCitasEnCSV(new Cita(paciente,medico,fechaHora,asunto));
+            this.citas.add(new Cita(paciente,medico,fechaHora,asunto));
         } catch (IOException var6) {
             System.err.println("Error al guardar citas en archivo: " + var6.getMessage());
         }
-
     }
+        public boolean citaExistente(Medico medico, LocalDateTime fechaHora) {
+            return this.citas.stream().anyMatch(cita -> cita.getMedico().equals(medico) && cita.getFechaHora().equals(fechaHora));
+        }
 
     public Paciente buscarPacientePorNombre(String nombre, String apellido) {
         return (Paciente)this.pacientes.stream().filter((p) -> {
@@ -304,11 +309,11 @@ public class SistemaCitas implements AlmacenamientoDatos {
                 UUID medicoID = UUID.fromString(data[2]);
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
                 LocalDateTime fechaHora = LocalDateTime.parse(data[3], formatter);
-                Cita.EstatusCita estatus = Cita.EstatusCita.valueOf(data[4]);
+                String asunto = data[4];
                 Paciente paciente = this.buscarPacientePorId(pacienteID);
                 Medico medico = this.buscarMedicoPorId(medicoID);
                 if (paciente != null && medico != null) {
-                    this.citas.add(new Cita(citaID, paciente, medico, fechaHora, estatus));
+                    this.citas.add(new Cita(citaID, paciente, medico, fechaHora, asunto));
                 }
             }
         }

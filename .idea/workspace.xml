@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="Sistema_Gestion_Citas:jar7" />
+      <artifact name="Sistema_Gestion_Citas:jar8" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
@@ -10,19 +10,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aba55ad0-109e-4c13-8021-c40b323e98cd" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/Sistema_Gestion_Citas_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/Sistema_Gestion_Citas_jar2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/Sistema_Gestion_Citas_jar3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/Sistema_Gestion_Citas_jar4.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/Sistema_Gestion_Citas_jar5.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/medicos.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/resources.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_09_05_2023_04_55_p__m___Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_09_05_2023_04_55_p__m___Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AlmacenamientoDatos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AlmacenamientoDatos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Cita.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Cita.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/InterfazSistemaCitas.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/InterfazSistemaCitas.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SistemaCitas.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SistemaCitas.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/db/citas.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/db/citas.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
